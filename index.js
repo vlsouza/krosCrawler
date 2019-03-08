@@ -1,19 +1,19 @@
-let Crawler = {
+let crawler = {
 	request: null,
 	cheerio: null,
 	fs: null,
 	init: function () {
-		Crawler.request = require('request');
-		Crawler.cheerio = require('cheerio');
-		Crawler.fs = require('fs');
-		Crawler.getMovies();
+		crawler.request = require('request');
+		crawler.cheerio = require('cheerio');
+		crawler.fs = require('fs');
+		crawler.getMovies();
 	},
 	getMovies: function () {
-		Crawler.request("http://krosfinder.com/pt/cards?v=scan&page=0", function (err, res, body) {
+		crawler.request("http://krosfinder.com/pt/cards?v=scan&page=0", function (err, res, body) {
 			if (err)
 				console.log("Error: " + err);
 
-			var $ = Crawler.cheerio.load(body);
+			var $ = crawler.cheerio.load(body);
 
 			$("img[alt='Front picture of Krosmaster']").each(function () {
 				const krosmaterName = $(this).parent().attr("title");
@@ -25,4 +25,4 @@ let Crawler = {
 	}
 };
 
-Crawler.init();
+crawler.init();
